@@ -2,7 +2,9 @@ import React from "react";
 import Cell from "./Cell";
 
 function Board({ board }) {
-  board && console.log(board);
+// console.log(board);
+
+  
 
   return (
     board && (
@@ -10,7 +12,7 @@ function Board({ board }) {
         {board.map((row, index) => (
           <React.Fragment key={index}>
             {row.map((cell) => (
-              <Cell {...cell} />
+              <Cell key={cell.position} cell={cell} />
             ))}
           </React.Fragment>
         ))}
