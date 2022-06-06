@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Board from "./Components/Board";
 import { BoardModel } from "./Models/BoardModel";
-import { setSelectedMove } from "./store/reducers/main/main.reducer";
+import { setSelectedMove,clearSelectedMove,setBoardtoStore } from "./store/reducers/main/main.reducer";
 
 const cells = [];
 
@@ -20,9 +20,18 @@ function App() {
   const dispatch = useDispatch()
   const { selectedMove } = useSelector((state) => state.main);
   const [board, setBoard] = useState(null);
+  
+  useEffect(() => {
+    setBoard(boardArr);
+  }, [boardArr]);
 
   useEffect(() => {
-    if (board && selectedMove.length > 1) {
+    dispatch(setBoardtoStore(board))
+  }, [board])
+  
+
+  useEffect(() => {
+    if (board && selectedMove.length === 2) {
       let moved = board.map((item) => {
         return item.map((item) => {
           if (item.position === selectedMove[0].position) {
@@ -39,16 +48,18 @@ function App() {
         });
       });
       setBoard(moved)
-    }
-    if(selectedMove.length===2){
       dispatch(setSelectedMove())
-
+      
+      dispatch(clearSelectedMove())
     }
+    
+   
   }, [selectedMove,dispatch]);
 
-  useEffect(() => {
-    setBoard(boardArr);
-  }, [boardArr]);
+
+
+
+  
 
   return (
     <div className="App">
