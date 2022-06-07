@@ -18,7 +18,7 @@ for (let i = 0; i < 64; i++) {
 const boardArr = BoardModel();
 function App() {
   const dispatch = useDispatch()
-  const { selectedMove } = useSelector((state) => state.main);
+  const { selectedMove,choppedChecker} = useSelector((state) => state.main);
   const [board, setBoard] = useState(null);
   
   useEffect(() => {
@@ -29,11 +29,22 @@ function App() {
     dispatch(setBoardtoStore(board))
   }, [board])
   
+  useEffect(() => {
+   
+  }, [])
+  
 
   useEffect(() => {
+    
+
+    
     if (board && selectedMove.length === 2) {
       let moved = board.map((item) => {
         return item.map((item) => {
+          
+          if(choppedChecker?.x===item.x && choppedChecker?.y===item.y) {
+            item = {...item,checkerColor: false}
+          } 
           if (item.position === selectedMove[0].position) {
             item = { ...selectedMove[0], checkerColor: false };
           }

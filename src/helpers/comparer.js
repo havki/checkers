@@ -1,6 +1,6 @@
 const comparer = (prev, next) => {
   let moveDirection = '';
-  switch (true) {
+  switch (true) {  //опредление направления рубления относительно конечной точки
           case (prev.x === next.x - 2 && prev.y === next.y + 2):
             moveDirection = "ld";
             break;
@@ -16,30 +16,24 @@ const comparer = (prev, next) => {
           default:
             break;
         }
+        
+        if(moveDirection==='ld'){         //вычисления позиции срубленной шашки
+          return {x:next.x-1,y:next.y+1}
+        }
+        if(moveDirection==='rd'){
+          return {x:next.x+1,y:next.y+1}
+        }
+        if(moveDirection==='lt'){
+          return {x:next.x-1,y:next.y-1}
+        }
+        if(moveDirection==='rt'){
+          return {x:next.x+1,y:next.y-1}
+        }
+
+
   return moveDirection;
 
   
 };
 export default comparer;
 
-// let moveDirection = '';
-//  if ((prev.x === next.x - 2 && prev.y === next.y + 2)) {
-   
-//  }
-//  if ((prev.x === next.x + 2 && prev.y === next.y + 2)) {
-   
-//  }
-//  if ( (prev.x === next.x - 2 && prev.y === next.y - 2)) {
-   
-//  }
-//  if ((prev.x === next.x + 2 && prev.y === next.y - 2)) {
-   
-//  }
-//  if (
-//    (prev.x === next.x - 2 && prev.y === next.y + 2) || // лево-вниз
-//    (prev.x === next.x + 2 && prev.y === next.y + 2) || // право-вниз
-//    (prev.x === next.x - 2 && prev.y === next.y - 2) || // лево-вверх
-//    (prev.x === next.x + 2 && prev.y === next.y - 2) // право-вверх
-//  ) {
-  
-//  }
