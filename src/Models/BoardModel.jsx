@@ -364,7 +364,7 @@ export const BoardModel = () => {
         y: 6,
         position: "B2",
         color: "black",
-        checkerColor: "white"
+        checkerColor: false
       },
       {
         x: 2,
@@ -377,7 +377,7 @@ export const BoardModel = () => {
         y: 6,
         position: "D2",
         color: "black",
-        checkerColor: "white"
+        checkerColor: 'black'
       },
       {
         x: 4,
@@ -390,7 +390,7 @@ export const BoardModel = () => {
         y: 6,
         position: "F2",
         color: "black",
-        checkerColor: "white"
+        checkerColor: false
       },
       {
         x: 6,
@@ -403,7 +403,7 @@ export const BoardModel = () => {
         y: 6,
         position: "H2",
         color: "black",
-        checkerColor: "white"
+        checkerColor: false
       }
     ],
     [
@@ -412,7 +412,7 @@ export const BoardModel = () => {
         y: 7,
         position: "A1",
         color: "black",
-        checkerColor: "white"
+        checkerColor: false
       },
       {
         x: 1,
@@ -425,7 +425,7 @@ export const BoardModel = () => {
         y: 7,
         position: "C1",
         color: "black",
-        checkerColor: "white"
+        checkerColor: false
       },
       {
         x: 3,
@@ -438,7 +438,7 @@ export const BoardModel = () => {
         y: 7,
         position: "E1",
         color: "black",
-        checkerColor: "white"
+        checkerColor: false
       },
       {
         x: 5,
@@ -451,7 +451,7 @@ export const BoardModel = () => {
         y: 7,
         position: "G1",
         color: "black",
-        checkerColor: "white"
+        checkerColor: false
       },
       {
         x: 7,

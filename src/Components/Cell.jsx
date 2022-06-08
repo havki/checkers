@@ -8,7 +8,7 @@ function Cell({ cell }) {
   const { color, checkerColor, que } = cell;
   const clickHandler = (e) => {
     e.stopPropagation(); //возможно не надо
-   dispatch(setSelectedMove(cell))
+    dispatch(setSelectedMove(cell))
    
     
   };
