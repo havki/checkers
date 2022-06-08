@@ -36,6 +36,15 @@
   background-color: blueviolet;
   border-radius: 50%;
 }
+.checker-white__que{
+  width: 55px;
+  height: 55px;
+  background-color: rgb(183, 144, 219);
+  border-radius: 50%;
+  border-color: black;
+  border-style: dashed;
+  border-width: 5px;
+}
 .checker-black{
   width: 58px;
   height: 58px;
@@ -43,5 +52,14 @@
   border-radius: 50%;
   border-style: solid;
   border-width: 2px;
+  border-color: aqua;
+}
+.checker-black__que{
+  width: 55px;
+  height: 55px;
+  background-color: rgb(11, 3, 19);
+  border-radius: 50%;
+  border-style: dashed;
+  border-width: 5px;
   border-color: aqua;
 }

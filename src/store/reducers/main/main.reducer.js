@@ -18,6 +18,9 @@ export const mainSlice = createSlice({
     clearSelectedMove: (state) => {
       state.selectedMove = [];
     },
+    clearQueen: (state) => {
+      state.queen= null
+    },
     setSelectedMove: (state, action) => {
       
       if (state.selectedMove.length === 1) {        //если шашка выбрана: проверка на верность хода
@@ -87,5 +90,6 @@ export const {
   setSelectedChecker,
   setSelectedMove,
   setBoardtoStore,
+  clearQueen
 } = mainSlice.actions;
 

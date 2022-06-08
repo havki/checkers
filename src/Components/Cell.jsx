@@ -1,20 +1,41 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectedMove } from "../store/reducers/main/main.reducer";
+import { setQueenMove, setSelectedMove } from "../store/reducers/main/main.reducer";
 
 function Cell({ cell }) {
   const dispatch = useDispatch();
-  const {selectedMove} = useSelector(state => state.main)
-  const { color, checkerColor } = cell;
+  const { selectedMove } = useSelector((state) => state.main);
+  const { color, checkerColor, que } = cell;
   const clickHandler = (e) => {
-    e.stopPropagation()                   //возможно не надо  
-    dispatch(setSelectedMove(cell));
+    e.stopPropagation(); //возможно не надо
+   dispatch(setSelectedMove(cell))
+   
+    
   };
+
   
+  if (color === "black" && que) {
+    return (
+      <div
+        onClick={selectedMove.length ? (e) => clickHandler(e) : null}
+        className="cell black"
+      >
+        {checkerColor === "white" && (
+          <div onClick={(e) => clickHandler(e)} className="checker-white__que"></div>
+        )}
+        {checkerColor === "black" && (
+          <div onClick={(e) => clickHandler(e)} className="checker-black__que"></div>
+        )}
+      </div>
+    );
+  }
+
   if (color === "black") {
     return (
-     
-      <div onClick={selectedMove.length ? (e) => clickHandler(e): null}  className="cell black">
+      <div
+        onClick={selectedMove.length ? (e) => clickHandler(e) : null}
+        className="cell black"
+      >
         {checkerColor === "white" && (
           <div onClick={(e) => clickHandler(e)} className="checker-white"></div>
         )}

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Board from "./Components/Board";
 import { BoardModel } from "./Models/BoardModel";
-import { setSelectedMove,clearSelectedMove,setBoardtoStore } from "./store/reducers/main/main.reducer";
+import { setSelectedMove,clearSelectedMove,setBoardtoStore, clearQueen,  } from "./store/reducers/main/main.reducer";
 
 const cells = [];
 
@@ -18,8 +18,9 @@ for (let i = 0; i < 64; i++) {
 const boardArr = BoardModel();
 function App() {
   const dispatch = useDispatch()
-  const { selectedMove,choppedChecker} = useSelector((state) => state.main);
+  const { selectedMove,choppedChecker,queen} = useSelector((state) => state.main);
   const [board, setBoard] = useState(null);
+
   
   useEffect(() => {
     setBoard(boardArr);
@@ -29,9 +30,6 @@ function App() {
     dispatch(setBoardtoStore(board))
   }, [board])
   
-  useEffect(() => {
-   
-  }, [])
   
 
   useEffect(() => {
@@ -41,7 +39,6 @@ function App() {
     if (board && selectedMove.length === 2) {
       let moved = board.map((item) => {
         return item.map((item) => {
-          
           if(choppedChecker?.x===item.x && choppedChecker?.y===item.y) {
             item = {...item,checkerColor: false}
           } 
@@ -50,18 +47,29 @@ function App() {
           }
 
           if (item.position === selectedMove[1].position) {
+            queen ? item = {
+              ...selectedMove[1],
+              checkerColor: selectedMove[0].checkerColor,
+              que:true
+            } :
             item = {
               ...selectedMove[1],
               checkerColor: selectedMove[0].checkerColor,
+              
             };
           }
           return item;
         });
       });
       setBoard(moved)
-      dispatch(setSelectedMove())
       
+      dispatch(setSelectedMove())
       dispatch(clearSelectedMove())
+      
+    }
+    return ( )=> {
+      dispatch(clearQueen())
+
     }
     
    
