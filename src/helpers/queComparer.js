@@ -1,7 +1,6 @@
 const queComparer = (prev, next) => {
   let moveDirection = "";
   let counter = 0;
-  console.log(prev, next);
 
   for (let i = 1; i < 8; i++) {
     if (moveDirection) break;
