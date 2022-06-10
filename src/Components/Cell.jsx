@@ -4,7 +4,7 @@ import { setQueenMove, setSelectedMove } from "../store/reducers/main/main.reduc
 
 function Cell({ cell }) {
   const dispatch = useDispatch();
-  const { selectedMove } = useSelector((state) => state.main);
+  const { selectedMove,whoseTurn } = useSelector((state) => state.main);
   const { color, checkerColor, que } = cell;
   const clickHandler = (e) => {
     e.stopPropagation(); //возможно не надо
@@ -12,6 +12,7 @@ function Cell({ cell }) {
    
     
   };
+
 
   
   if (color === "black" && que) {
@@ -21,10 +22,10 @@ function Cell({ cell }) {
         className="cell black"
       >
         {checkerColor === "white" && (
-          <div onClick={(e) => clickHandler(e)} className="checker-white__que"></div>
+          <div onClick={whoseTurn === 'white' ? (e) => clickHandler(e) : null} className="checker-white__que"></div>
         )}
         {checkerColor === "black" && (
-          <div onClick={(e) => clickHandler(e)} className="checker-black__que"></div>
+          <div onClick={whoseTurn === 'black' ? (e) => clickHandler(e) : null} className="checker-black__que"></div>
         )}
       </div>
     );
@@ -37,10 +38,10 @@ function Cell({ cell }) {
         className="cell black"
       >
         {checkerColor === "white" && (
-          <div onClick={(e) => clickHandler(e)} className="checker-white"></div>
+          <div onClick={whoseTurn === 'white' ? (e) => clickHandler(e) : null} className="checker-white"></div>
         )}
         {checkerColor === "black" && (
-          <div onClick={(e) => clickHandler(e)} className="checker-black"></div>
+          <div onClick={whoseTurn === 'black' ? (e) => clickHandler(e) : null} className="checker-black"></div>
         )}
       </div>
     );

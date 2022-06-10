@@ -27,7 +27,7 @@ const queComparer = (prev, next) => {
 
   let array = [];
   for (let i = 1; i < counter; i++) {
-    //вычисления позиции срубленной шашки
+    //вычисления позиций срубленых шашек
     if (moveDirection === "ld") {
       array.push({ x: next.x - i, y: next.y + i });
     }
@@ -42,7 +42,7 @@ const queComparer = (prev, next) => {
     }
   }
 
-  
+
 
   let upOrDown = "";
   switch (moveDirection) {

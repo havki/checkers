@@ -13,7 +13,7 @@ export const BoardModel = () => {
           y: i,
           position: letter + int,
           color: "black",
-          checkerColor: (i < 3 && "black") || (i > 4 && "white"),
+          checkerColor: 'black',
         });
       } else {
         row.push({

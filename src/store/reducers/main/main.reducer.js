@@ -29,14 +29,13 @@ export const mainSlice = createSlice({
         let prev = current(state.selectedMove[0]); // выбраная шашка
         const next = action.payload; //место хода
         let queRubic = 0;
+        let cellsToClear = [];
         if (state.selectedMove[0].que) {
           let queMoveConfirm = 0;
           if (bigComparer(prev, next)) {
             const arrayOfCellsBetwQueenMove = queComparer(prev, next);
-            let withoutMyChks = [];
-            let withEnemies = [];
-            let allCheckerColorsInLine = [];
             let twoInRow = false
+            let allCheckerColorsInLine = [];
             let Board =
               arrayOfCellsBetwQueenMove.orient === "down"
                 ? state.board
@@ -50,14 +49,13 @@ export const mainSlice = createSlice({
                   x++
                 ) {
                   const cell = arrayOfCellsBetwQueenMove.line[x];
-
                   if (
                     cell !== undefined &&
                     cell?.y === item.y &&
                     cell?.x === item.x
                   ) {
                     allCheckerColorsInLine.push(item.checkerColor);
-                    withoutMyChks.push(cell);
+                    cellsToClear.push(cell);
                   }
                 }
               }
@@ -88,7 +86,7 @@ export const mainSlice = createSlice({
             
             // console.log(twoInRow,'twoInRow');
             // console.log(allCheckerColorsInLine.includes(prev.checkerColor));
-            console.log(withoutMyChks, arrayOfCellsBetwQueenMove.line);
+            console.log(cellsToClear, arrayOfCellsBetwQueenMove.line);
             // console.log(allCheckerColorsInLine, "allCheckerColorsInLine");
 
           }
@@ -97,7 +95,7 @@ export const mainSlice = createSlice({
           }
 
           if (queMoveConfirm === 3 || queRubic===2){
-            // state.choppedChecker= allCheckerColorsInLine
+            state.choppedChecker= cellsToClear
             state.selectedMove.push(action.payload);
           }
         }

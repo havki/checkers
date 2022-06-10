@@ -40,6 +40,17 @@ function App() {
     if (board && selectedMove.length === 2) {
       let moved = board.map((item) => {
         return item.map((item) => {
+          if (choppedChecker) {
+            
+            for (let i = 0; i < choppedChecker.length; i++) {
+              const element = choppedChecker[i];
+              if (choppedChecker && choppedChecker[i]?.x === item.x && choppedChecker[i]?.y === item.y) {
+                item = { ...item, checkerColor: false };
+                console.log('готово');
+              }
+              
+            }
+          }
           if (choppedChecker?.x === item.x && choppedChecker?.y === item.y) {
             item = { ...item, checkerColor: false };
           }
@@ -68,7 +79,8 @@ function App() {
       dispatch(clearSelectedMove());
     }
     return () => {
-      dispatch(clearQueen());
+
+     queen && dispatch(clearQueen());
     };
   }, [selectedMove, dispatch]);
 
