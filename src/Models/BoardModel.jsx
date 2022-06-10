@@ -174,7 +174,7 @@ export const BoardModel = () => {
         y: 2,
         position: "F6",
         color: "black",
-        checkerColor: false,
+        checkerColor: 'black',
       },
       {
         x: 6,
@@ -222,7 +222,7 @@ export const BoardModel = () => {
         y: 3,
         position: "E5",
         color: "black",
-        checkerColor: false,
+        checkerColor: 'black',
       },
       {
         x: 5,

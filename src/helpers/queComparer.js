@@ -42,7 +42,7 @@ const queComparer = (prev, next) => {
     }
   }
 
-  console.log(moveDirection);
+  
 
   let upOrDown = "";
   switch (moveDirection) {
@@ -60,10 +60,10 @@ const queComparer = (prev, next) => {
       break;
   }
 
-  console.log(upOrDown);
+ 
 
-  // return {line:array.reverse(),orient:upOrDown }
-  return array.reverse()
+  return {line:array.reverse(),orient:upOrDown }
+
 };
 
 export default queComparer;

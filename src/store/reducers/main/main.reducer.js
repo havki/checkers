@@ -28,46 +28,78 @@ export const mainSlice = createSlice({
         //если шашка выбрана: проверка на верность хода
         let prev = current(state.selectedMove[0]); // выбраная шашка
         const next = action.payload; //место хода
-        let queRubic = false;
+        let queRubic = 0;
         if (state.selectedMove[0].que) {
           let queMoveConfirm = 0;
           if (bigComparer(prev, next)) {
             const arrayOfCellsBetwQueenMove = queComparer(prev, next);
             let withoutMyChks = [];
             let withEnemies = [];
-            let all = []
-            let revBoard = state.board.reverse() 
-            revBoard.forEach((oneOfEightArr) => {
+            let allCheckerColorsInLine = [];
+            let twoInRow = false
+            let Board =
+              arrayOfCellsBetwQueenMove.orient === "down"
+                ? state.board
+                : state.board.reverse();
+            Board.forEach((oneOfEightArr) => {
               for (let i = 0; i < oneOfEightArr.length; i++) {
                 const item = oneOfEightArr[i];
-                for (let x = 0; x < arrayOfCellsBetwQueenMove.length; x++) {
-                  const cell = arrayOfCellsBetwQueenMove[x];
-                
+                for (
+                  let x = 0;
+                  x < arrayOfCellsBetwQueenMove.line.length;
+                  x++
+                ) {
+                  const cell = arrayOfCellsBetwQueenMove.line[x];
 
                   if (
                     cell !== undefined &&
                     cell?.y === item.y &&
-                    cell?.x === item.x 
+                    cell?.x === item.x
                   ) {
-                    all.push(item.checkerColor);
+                    allCheckerColorsInLine.push(item.checkerColor);
                     withoutMyChks.push(cell);
-  
                   }
                 }
               }
             });
-            console.log(withoutMyChks,arrayOfCellsBetwQueenMove);
-            console.log(withEnemies);
-            console.log(all,'all');
-            queMoveConfirm += 1;
-            if (withoutMyChks.length === arrayOfCellsBetwQueenMove.length) {
+            if (!allCheckerColorsInLine.includes(prev.checkerColor)) {
+              queRubic += 1
+              queMoveConfirm += 1;
             }
+            
+            
+
+            for (let i = 1; i < allCheckerColorsInLine.length; i++) {
+              const prevElement = allCheckerColorsInLine[i-1];
+              const element = allCheckerColorsInLine[i];
+             if (prevElement===element && prevElement && element) {
+              twoInRow = true 
+              break;
+             }
+            }
+
+            if (!twoInRow) {
+              queRubic += 1
+              queMoveConfirm += 1;
+
+            }
+            console.log(queRubic);
+           
+            
+            // console.log(twoInRow,'twoInRow');
+            // console.log(allCheckerColorsInLine.includes(prev.checkerColor));
+            console.log(withoutMyChks, arrayOfCellsBetwQueenMove.line);
+            // console.log(allCheckerColorsInLine, "allCheckerColorsInLine");
+
           }
           if (!next.checkerColor) {
             queMoveConfirm += 1;
           }
 
-          if (queMoveConfirm === 2) state.selectedMove.push(action.payload);
+          if (queMoveConfirm === 3 || queRubic===2){
+            // state.choppedChecker= allCheckerColorsInLine
+            state.selectedMove.push(action.payload);
+          }
         }
         if (state.selectedMove[0].que === undefined) {
           let moveConfirm = 0;

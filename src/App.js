@@ -31,7 +31,7 @@ function App() {
   useEffect(() => {
     setBoard(boardArr);
   }, [boardArr]);
-
+  
   useEffect(() => {
     dispatch(setBoardtoStore(board));
   }, [board]);
