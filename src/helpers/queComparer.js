@@ -26,7 +26,8 @@ const queComparer = (prev, next) => {
   }
 
   let array = [];
-  for (let i = 1; i < counter; i++) {      //вычисления позиции срубленной шашки
+  for (let i = 1; i < counter; i++) {
+    //вычисления позиции срубленной шашки
     if (moveDirection === "ld") {
       array.push({ x: next.x - i, y: next.y + i });
     }
@@ -41,9 +42,28 @@ const queComparer = (prev, next) => {
     }
   }
 
-  
+  console.log(moveDirection);
 
-  return array.reverse();
+  let upOrDown = "";
+  switch (moveDirection) {
+    case "lt":
+    case "rt":
+      upOrDown = "down";
+      break;
+
+    case "ld":
+    case "rd":
+      upOrDown = "up";
+      break;
+
+    default:
+      break;
+  }
+
+  console.log(upOrDown);
+
+  // return {line:array.reverse(),orient:upOrDown }
+  return array.reverse()
 };
 
 export default queComparer;

@@ -34,34 +34,33 @@ export const mainSlice = createSlice({
           if (bigComparer(prev, next)) {
             const arrayOfCellsBetwQueenMove = queComparer(prev, next);
             let withoutMyChks = [];
-            state.board.forEach((oneOfEightArr) => {
+            let withEnemies = [];
+            let all = []
+            let revBoard = state.board.reverse() 
+            revBoard.forEach((oneOfEightArr) => {
               for (let i = 0; i < oneOfEightArr.length; i++) {
                 const item = oneOfEightArr[i];
                 for (let x = 0; x < arrayOfCellsBetwQueenMove.length; x++) {
                   const cell = arrayOfCellsBetwQueenMove[x];
-                  if (
-                    cell !== undefined &&
-                    cell?.x === item.x &&
-                    cell?.y === item.y &&
-                    item?.checkerColor !== state.selectedMove[0].checkerColor
-                  ) {
-                    
-                  }
+                
 
                   if (
                     cell !== undefined &&
-                    cell?.x === item.x &&
                     cell?.y === item.y &&
-                    item?.checkerColor !== state.selectedMove[0].checkerColor
+                    cell?.x === item.x 
                   ) {
+                    all.push(item.checkerColor);
                     withoutMyChks.push(cell);
+  
                   }
                 }
               }
             });
-
+            console.log(withoutMyChks,arrayOfCellsBetwQueenMove);
+            console.log(withEnemies);
+            console.log(all,'all');
+            queMoveConfirm += 1;
             if (withoutMyChks.length === arrayOfCellsBetwQueenMove.length) {
-              queMoveConfirm += 1;
             }
           }
           if (!next.checkerColor) {
