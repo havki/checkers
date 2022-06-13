@@ -40,7 +40,9 @@ export const mainSlice = createSlice({
               arrayOfCellsBetwQueenMove.orient === "down"
                 ? state.board
                 : state.board.reverse();
+                
             Board.forEach((oneOfEightArr) => {
+              
               for (let i = 0; i < oneOfEightArr.length; i++) {
                 const item = oneOfEightArr[i];
                 for (
@@ -49,7 +51,6 @@ export const mainSlice = createSlice({
                   x++
                 ) {
                   const cell = arrayOfCellsBetwQueenMove.line[x];
-                  console.log(arrayOfCellsBetwQueenMove.line);
                   if (
                     cell !== undefined &&
                     cell?.y === item.y &&
