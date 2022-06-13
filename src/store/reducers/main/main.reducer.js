@@ -9,7 +9,7 @@ export const mainSlice = createSlice({
   initialState: {
     board: null, //импорт доски из стейта App для проверки на шашку если рубишь
     selectedMove: [], // [0]-выбор [1]-ход
-    whoseTurn: "white",
+    whoseTurn: "black",
     choppedChecker: null,
     queen: null, // индикатор наступления на последнюю клетку
   },
@@ -34,7 +34,7 @@ export const mainSlice = createSlice({
           let queMoveConfirm = 0;
           if (bigComparer(prev, next)) {
             const arrayOfCellsBetwQueenMove = queComparer(prev, next);
-            let twoInRow = false
+            let twoInRow = false;
             let allCheckerColorsInLine = [];
             let Board =
               arrayOfCellsBetwQueenMove.orient === "down"
@@ -49,6 +49,7 @@ export const mainSlice = createSlice({
                   x++
                 ) {
                   const cell = arrayOfCellsBetwQueenMove.line[x];
+                  console.log(arrayOfCellsBetwQueenMove.line);
                   if (
                     cell !== undefined &&
                     cell?.y === item.y &&
@@ -61,48 +62,45 @@ export const mainSlice = createSlice({
               }
             });
             if (!allCheckerColorsInLine.includes(prev.checkerColor)) {
-              queRubic += 1
+              queRubic += 1;
               queMoveConfirm += 1;
             }
-            
-            
 
             for (let i = 1; i < allCheckerColorsInLine.length; i++) {
-              const prevElement = allCheckerColorsInLine[i-1];
+              const prevElement = allCheckerColorsInLine[i - 1];
               const element = allCheckerColorsInLine[i];
-             if (prevElement===element && prevElement && element) {
-              twoInRow = true 
-              break;
-             }
+              if (prevElement === element && prevElement && element) {
+                twoInRow = true;
+                break;
+              }
             }
 
             if (!twoInRow) {
-              queRubic += 1
+              queRubic += 1;
               queMoveConfirm += 1;
-
             }
             console.log(queRubic);
-           
-            
+
             // console.log(twoInRow,'twoInRow');
             // console.log(allCheckerColorsInLine.includes(prev.checkerColor));
             console.log(cellsToClear, arrayOfCellsBetwQueenMove.line);
             // console.log(allCheckerColorsInLine, "allCheckerColorsInLine");
-
           }
-          if (!next.checkerColor) {
+          if (next.checkerColor !== "white") {
             queMoveConfirm += 1;
+            console.log(next);
           }
 
-          if (queMoveConfirm === 3 || queRubic===2){
-            state.choppedChecker= cellsToClear
+          if (queMoveConfirm === 3 || queRubic === 2) {
+            state.choppedChecker = cellsToClear;
             state.selectedMove.push(action.payload);
           }
+          
         }
         if (state.selectedMove[0].que === undefined) {
-          let moveConfirm = 0;
+          let moveConfirm = 0; //одобрятель хода
 
-          let rubic = false; //разрешение рубить
+          let rubic = false; //разрешение рубить шашкой
           console.log(prev, next);
           if (prev.checkerColor === "white" && next.y === 0) {
             state.queen = next;
@@ -128,11 +126,15 @@ export const mainSlice = createSlice({
             state.board.forEach((element) => {
               element.forEach((elem) => {
                 if (
-                  cuttedChecker?.x === elem.x &&
-                  cuttedChecker?.y === elem.y &&
+                  // если ячейка совпала и цвет не равен своему
+                  cuttedChecker.x === elem.x &&
+                  cuttedChecker.y === elem.y &&
                   elem?.checkerColor !== state.selectedMove[0].checkerColor
                 ) {
-                  rubic = true;
+                  if (elem.checkerColor) {
+                    // если есть что рубить
+                    rubic = true;
+                  }
                 }
               });
             });

@@ -1,3 +1,6 @@
+/*
+отдает объект с результатом 
+*/
 const queComparer = (prev, next) => {
   let moveDirection = "";
   let counter = 0;

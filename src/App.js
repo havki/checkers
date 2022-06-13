@@ -46,7 +46,7 @@ function App() {
               const element = choppedChecker[i];
               if (choppedChecker && choppedChecker[i]?.x === item.x && choppedChecker[i]?.y === item.y) {
                 item = { ...item, checkerColor: false };
-                console.log('готово');
+                
               }
               
             }
@@ -58,7 +58,7 @@ function App() {
             item = { ...selectedMove[0], checkerColor: false };
           }
 
-          if (item.position === selectedMove[1].position) {
+          if (item.position === selectedMove[1].position  ) {
             queen || selectedMove[0].que 
               ? (item = {
                   ...selectedMove[1],
